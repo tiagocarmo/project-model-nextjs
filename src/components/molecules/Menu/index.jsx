@@ -45,6 +45,20 @@ const Menu = () => {
       </Style.ListItem>
       <Style.ListItem>
         <MenuLink
+          url='/theme/blue'
+          text='Render no client com theme'
+          className={router.pathname === '/theme/blue' ? 'active' : ''}
+        />
+      </Style.ListItem>
+      <Style.ListItem>
+        <MenuLink
+          url='/theme/red'
+          text='Render no server com theme'
+          className={router.pathname === '/theme/red' ? 'active' : ''}
+        />
+      </Style.ListItem>
+      <Style.ListItem>
+        <MenuLink
           url='/about'
           text='Sobre'
           className={router.pathname === '/about' ? 'active' : ''}
