@@ -7,17 +7,18 @@ const HomePage = () => {
   const [covidData, setCovidData] = useState();
   const [uf, setUf] = useState();
   const router = useRouter();
-  const { uf } = router.query;
+
   useEffect(() => {
-    if (!covidData) {
+    if(!uf && router.query && router.query.uf) {
+      setUf(router.query.uf);
+    }
+    if (!covidData && uf) {
       CovidAPIClient.getReportAllState().then((data) => {
         const filteredCovidState = uf ? { data: data.data.filter(obj => obj.uf === uf.toLocaleUpperCase()) } : data;
-        console.log(uf)
-        console.log('carai', filteredCovidState)
         setCovidData(filteredCovidState);
       });
     }
-  }, [uf]);
+  }, [router, uf]);
 
   return (
     <Home dataTable={covidData}>
