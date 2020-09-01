@@ -11,8 +11,22 @@ const Menu = () => {
       <Style.ListItem>
         <MenuLink
           url='/'
-          text='Home'
+          text='Home (render no client)'
           className={router.pathname === '/' ? 'active' : ''}
+        />
+      </Style.ListItem>
+      <Style.ListItem>
+        <MenuLink
+          url='/ssr'
+          text='SSR (render no server)'
+          className={router.pathname === '/ssr' ? 'active' : ''}
+        />
+      </Style.ListItem>
+      <Style.ListItem>
+        <MenuLink
+          url='/static'
+          text='Static (render na build)'
+          className={router.pathname === '/static' ? 'active' : ''}
         />
       </Style.ListItem>
       <Style.ListItem>
