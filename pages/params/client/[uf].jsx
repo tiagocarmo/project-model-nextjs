@@ -5,20 +5,17 @@ import Home from '../../../src/components/templates/Home';
 
 const HomePage = () => {
   const [covidData, setCovidData] = useState();
-  const [uf, setUf] = useState();
   const router = useRouter();
 
   useEffect(() => {
-    if(!uf && router.query && router.query.uf) {
-      setUf(router.query.uf);
-    }
+    const { uf } = router.query;
     if (!covidData && uf) {
       CovidAPIClient.getReportAllState().then((data) => {
         const filteredCovidState = uf ? { data: data.data.filter(obj => obj.uf === uf.toLocaleUpperCase()) } : data;
         setCovidData(filteredCovidState);
       });
     }
-  }, [router, uf]);
+  }, [router, covidData]);
 
   return (
     <Home dataTable={covidData}>
