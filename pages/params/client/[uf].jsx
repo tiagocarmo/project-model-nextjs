@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import CovidAPIClient from '../src/client/CovidAPIClient';
-import Home from '../src/components/templates/Home';
+import { useRouter } from 'next/router';
+import CovidAPIClient from '../../../src/client/CovidAPIClient';
+import Home from '../../../src/components/templates/Home';
 
 const HomePage = () => {
   const [covidData, setCovidData] = useState();
+  const router = useRouter();
+
   useEffect(() => {
-    if (!covidData) {
+    const { uf } = router.query;
+    if (!covidData && uf) {
       CovidAPIClient.getReportAllState().then((data) => {
-        setCovidData(data);
+        const filteredCovidState = uf ? { data: data.data.filter(obj => obj.uf === uf.toLocaleUpperCase()) } : data;
+        setCovidData(filteredCovidState);
       });
     }
-  }, [covidData]);
+  }, [router, covidData]);
 
   return (
     <Home dataTable={covidData}>

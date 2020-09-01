@@ -9,7 +9,7 @@ describe('Testing MenuLink atom', () => {
   const text = chance.word();
   const url = chance.url();
 
-  test.only('Should render text correctly', () => {
+  test('Should render text correctly', () => {
     const { queryByText } = render(<MenuLink url={url} text={text} />);
     const link = queryByText(text);
     expect(link).not.toBeNull();
